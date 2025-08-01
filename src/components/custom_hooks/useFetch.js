@@ -22,7 +22,7 @@ function useFetch(url) {
             } catch (err) {
                 setError(err.message);
             } finally {
-                setTimeout(() => setLoading(false), 1000);
+                setLoading(false)
             }
         }
         fechedData();

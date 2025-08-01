@@ -70,7 +70,7 @@ const AddProducts = () => {
     ) {
       alert("Please fill all the details!");
     } else {
-      fetch("https://fakestoreapi.com/products", {
+      fetch("https://my-products-db-server.onrender.com/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(finalValues),

@@ -29,7 +29,7 @@ export const BootstrapTooltip = styled(({ className, ...props }) => (
 //?main function
 const Products = () => {
   let { products, setProducts, error, loading } = useFetch(
-    "https://fakestoreapi.com/products"
+    "https://my-products-db-server.onrender.com/products"
   );
   const location = useLocation();
 
@@ -92,7 +92,7 @@ const Products = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://fakestoreapi.com/products/${id}`)
+          .delete(`https://my-products-db-server.onrender.com/products/${id}`)
           .then(() => {
             setProducts(products.filter((product) => product.id !== id));
             Swal.fire({

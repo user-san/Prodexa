@@ -22,10 +22,12 @@ const EditProducts = () => {
 
   //?getting the clicked product
   useEffect(() => {
-    axios.get(`https://fakestoreapi.com/products/${id}`).then((res) => {
-      intitialProductDetails.current = res.data;
-      setUpdateProducts(res.data); // display it to textbox using handel input function
-    });
+    axios
+      .get(`https://my-products-db-server.onrender.com/products/${id}`)
+      .then((res) => {
+        intitialProductDetails.current = res.data;
+        setUpdateProducts(res.data); // display it to textbox using handel input function
+      });
   }, [id]);
 
   //   console.log(updateProduct);
@@ -49,7 +51,9 @@ const EditProducts = () => {
   };
 
   //!getting the product using custom hook that has API getReques
-  const { products } = useFetch("https://fakestoreapi.com/products"); //for comparing
+  const { products } = useFetch(
+    "https://my-products-db-server.onrender.com/products"
+  ); //for comparing
 
   let handleUpdate = (e) => {
     e.preventDefault();
@@ -74,7 +78,7 @@ const EditProducts = () => {
       alert("ℹ️ You Changed Nothing!");
       navigate("/products", { state: { focusId: id } });
     } else {
-      fetch(`https://fakestoreapi.com/products/${id}`, {
+      fetch(`https://my-products-db-server.onrender.com/products/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateProduct),
