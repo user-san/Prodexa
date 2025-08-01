@@ -52,7 +52,7 @@ const AddProducts = () => {
     }
   };
 
-  const { products } = useFetch("http://localhost:4000/products");
+  const { products } = useFetch("https://fakestoreapi.com/products");
   let handleAdd = (e) => {
     e.preventDefault();
     let duplicate = products.some(
@@ -70,7 +70,7 @@ const AddProducts = () => {
     ) {
       alert("Please fill all the details!");
     } else {
-      fetch("http://localhost:4000/products", {
+      fetch("https://fakestoreapi.com/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(finalValues),

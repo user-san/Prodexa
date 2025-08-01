@@ -28,9 +28,8 @@ export const BootstrapTooltip = styled(({ className, ...props }) => (
 
 //?main function
 const Products = () => {
-
   let { products, setProducts, error, loading } = useFetch(
-    "http://localhost:4000/products"
+    "https://fakestoreapi.com/products"
   );
   const location = useLocation();
 
@@ -93,7 +92,7 @@ const Products = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:4000/products/${id}`)
+          .delete(`https://fakestoreapi.com/products/${id}`)
           .then(() => {
             setProducts(products.filter((product) => product.id !== id));
             Swal.fire({
@@ -148,7 +147,10 @@ const Products = () => {
         <div className="productsHeader">
           <h1>Products</h1>
 
-          <BootstrapTooltip title="Click to add new Product" placement="top-start">
+          <BootstrapTooltip
+            title="Click to add new Product"
+            placement="top-start"
+          >
             <Button
               id="productAddBtn"
               variant="primary"

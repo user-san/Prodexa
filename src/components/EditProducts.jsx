@@ -22,7 +22,7 @@ const EditProducts = () => {
 
   //?getting the clicked product
   useEffect(() => {
-    axios.get(`http://localhost:4000/products/${id}`).then((res) => {
+    axios.get(`https://fakestoreapi.com/products/${id}`).then((res) => {
       intitialProductDetails.current = res.data;
       setUpdateProducts(res.data); // display it to textbox using handel input function
     });
@@ -49,7 +49,7 @@ const EditProducts = () => {
   };
 
   //!getting the product using custom hook that has API getReques
-  const { products } = useFetch("http://localhost:4000/products"); //for comparing
+  const { products } = useFetch("https://fakestoreapi.com/products"); //for comparing
 
   let handleUpdate = (e) => {
     e.preventDefault();
@@ -74,7 +74,7 @@ const EditProducts = () => {
       alert("ℹ️ You Changed Nothing!");
       navigate("/products", { state: { focusId: id } });
     } else {
-      fetch(`http://localhost:4000/products/${id}`, {
+      fetch(`https://fakestoreapi.com/products/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateProduct),
