@@ -39,7 +39,7 @@ function MyNavbar() {
           <MdOutlineOfflineBolt
             style={{ marginRight: "10px", padding: "none", color: "#212121ff" }}
           />
-          My Project
+          Prodexa
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
@@ -80,14 +80,6 @@ function MyNavbar() {
               // onClick={handleNavItemClick}
             >
               Products
-            </Nav.Link>
-            <Nav.Link
-              className="navLink"
-              as={Link}
-              to="/todoapp"
-              // onClick={handleNavItemClick}
-            >
-              ToDoApp
             </Nav.Link>
           </Nav>
           <Form className="d-flex">

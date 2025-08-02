@@ -3,9 +3,17 @@ const Home = () => {
   let { products } = useFetch(
     "https://my-products-db-server.onrender.com/products"
   );
+  console.log(products);
   return (
-    <div>
-      <h1>Home-{products.length}</h1>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <h1>Home</h1>
+      {products.length !== 0 && <p>Total Products-{products.length}</p>}
     </div>
   );
 };

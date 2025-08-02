@@ -116,7 +116,6 @@ const Products = () => {
               text: "Could not delete the product.",
               icon: "error",
             });
-            console.error(err);
           });
       }
     });
@@ -146,20 +145,21 @@ const Products = () => {
       <div>
         <div className="productsHeader">
           <h1>Products</h1>
-
-          <BootstrapTooltip
-            title="Click to add new Product"
-            placement="top-start"
-          >
-            <Button
-              id="productAddBtn"
-              variant="primary"
-              onClick={() => navigate("/addproducts")}
+          {!error && (
+            <BootstrapTooltip
+              title="Click to add new Product"
+              placement="top-start"
             >
-              Add
-              <PlaylistAddRoundedIcon />
-            </Button>
-          </BootstrapTooltip>
+              <Button
+                id="productAddBtn"
+                variant="primary"
+                onClick={() => navigate("/addproducts")}
+              >
+                Add
+                <PlaylistAddRoundedIcon />
+              </Button>
+            </BootstrapTooltip>
+          )}
         </div>
 
         {products.length !== 0 && (
@@ -238,7 +238,7 @@ const Products = () => {
 
         {error && (
           <center>
-            <p>{error}</p>
+            <p>{error}...</p>
           </center>
         )}
       </div>
