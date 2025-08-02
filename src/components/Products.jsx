@@ -14,6 +14,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import PlaylistAddRoundedIcon from "@mui/icons-material/PlaylistAddRounded";
 
+import "./Products.css";
+
 //!BootstrapTooltip using material ui
 export const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -137,6 +139,7 @@ const Products = () => {
           size="small"
           text=""
           textColor=""
+          speedPlus="2"
         />
       </div>
     );
@@ -190,7 +193,7 @@ const Products = () => {
                   </center>
                   <Card.Body className="pBody">
                     <Card.Title style={{ fontSize: "18px" }}>
-                      <b>{product.title}</b>
+                      <b className="productTitle">{product.title}</b>
                     </Card.Title>
                     <Card.Text className="pDiscription">
                       {product.description}
@@ -201,34 +204,38 @@ const Products = () => {
                       style={{
                         paddingTop: "20px",
                         paddingLeft: "20px",
-                        fontSize: "26px",
+                        fontSize: "25px",
                       }}
                     >
                       ${product.price}
                     </Card.Text>
-                    <BootstrapTooltip title="Delete" placement="top">
-                      <Button
-                        className="productDeleteBtn"
-                        variant="primary"
-                        onClick={() => handelDeleteProducts(product.id)}
-                      >
-                        <DeleteSweepRoundedIcon />
-                      </Button>
-                    </BootstrapTooltip>
-                    <BootstrapTooltip title="Edit" placement="top">
-                      <Button
-                        className="productEditBtn"
-                        variant="primary"
-                        onClick={() => navigate(`/editproducts/${product.id}`)}
-                      >
-                        <DriveFileRenameOutlineRoundedIcon />
-                      </Button>
-                    </BootstrapTooltip>
-                    <BootstrapTooltip title="Add to Cart" placement="top">
-                      <Button className="pbtn" variant="primary">
-                        <ShoppingCartRoundedIcon />
-                      </Button>
-                    </BootstrapTooltip>
+                    <div className="button-group">
+                      <BootstrapTooltip title="Delete" placement="top">
+                        <Button
+                          className="productBtn productDeleteBtn"
+                          variant="primary"
+                          onClick={() => handelDeleteProducts(product.id)}
+                        >
+                          <DeleteSweepRoundedIcon />
+                        </Button>
+                      </BootstrapTooltip>
+                      <BootstrapTooltip title="Edit" placement="top">
+                        <Button
+                          className="productBtn productEditBtn"
+                          variant="primary"
+                          onClick={() =>
+                            navigate(`/editproducts/${product.id}`)
+                          }
+                        >
+                          <DriveFileRenameOutlineRoundedIcon />
+                        </Button>
+                      </BootstrapTooltip>
+                      <BootstrapTooltip title="Add to Cart" placement="top">
+                        <Button className="productBtn pbtn" variant="primary">
+                          <ShoppingCartRoundedIcon />
+                        </Button>
+                      </BootstrapTooltip>
+                    </div>
                   </Card.Footer>
                 </Card>
               );

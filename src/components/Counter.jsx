@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 function Counter() {
-  const text = "Counter => ";
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -27,10 +26,11 @@ function Counter() {
   }
   return (
     <>
-      <h4>
-        {text}
-        {count}
+      <h4 >
+        Counter{" => "}
+       <span className="counterText">{count}</span> 
       </h4>
+
       <br />
       <span>
         <button id="myButton" onClick={() => setCount(count + 1)}>

@@ -1,0 +1,144 @@
+.productsHeader {
+  display: flex;
+  /* border: #000000 solid; */
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+#productAddBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: linear-gradient(to right, #26a5b4, #7387ed96);
+  border: none;
+  width: 130px;
+  height: 50px;
+  font-size: 24px;
+}
+
+#productAddBtn:hover {
+  background: linear-gradient(to right, #26a5b4, #0d30de96);
+}
+
+/* --- Product Section Container --- */
+.productSection {
+  padding: 50px;
+  margin-top: 50px;
+  display: flex;
+  width: 95vw;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
+  overflow: hidden;
+  /* border: #0c8c9a solid; */
+}
+
+/* --- Individual Product Card --- */
+.products {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30rem; /* or adjust as needed */
+  margin: 10px;
+  scroll-margin-top: 80px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.products:hover {
+  transform: translateY(-15px);
+  transition-duration: 1s;
+  box-shadow: 0px 2px 50px rgba(132, 132, 131, 0.877);
+  
+}
+
+
+.productTitle {
+  font-size: 18px;
+  font-weight: bold;
+  height: 48px; /* or try 2.5em if you're using `em` units */
+  line-height: 1.2em;
+  display: block;
+}
+
+/* --- Description Scroll --- */
+.pDiscription {
+  overflow-y: scroll;
+  height: 150px;
+  background-color: #91919155;
+  padding: 10px;
+  border-radius: 5px;
+  scrollbar-width: 20px;
+}
+
+.pDiscription::-webkit-scrollbar {
+  width: 5px;
+}
+
+.pDiscription::-webkit-scrollbar-track {
+  background: #b0afaf;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.pDiscription::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+.pDiscription:hover::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #1d9a0cce, #7387ed96);
+  border: none;
+}
+
+/* --- Body Font --- */
+.pBody {
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+/* --- Footer Layout --- */
+.pFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 0;
+}
+.pFooter .button-group {
+  display: flex;
+  gap: 20px; /* spacing between buttons */
+}
+
+/* --- footer Buttons --- */
+
+.productBtn {
+  width: 50px;
+  height: 45px;
+  border-radius: 6px;
+  padding: 0 !important;
+}
+.productDeleteBtn svg,
+.productEditBtn svg,
+.pbtn svg {
+  font-size: 25px;
+}
+
+.productDeleteBtn {
+  background: linear-gradient(to right, #f48804e0, #858fc0c9);
+  border: #0c8c9a !important;
+}
+
+.productEditBtn {
+  background: linear-gradient(to right, #0c8c9a, #858fc0c9);
+  border: #0c8c9a !important;
+}
+
+.pbtn {
+  background: linear-gradient(to right, #1d9a0c, #858fc0c9);
+  border: #1d9a0c !important;
+}
