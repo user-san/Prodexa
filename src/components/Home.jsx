@@ -3,7 +3,7 @@ const Home = () => {
   let { products } = useFetch(
     "https://my-products-db-server.onrender.com/products"
   );
-  console.log(products);
+
   return (
     <div
       style={{
