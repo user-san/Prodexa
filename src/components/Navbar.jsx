@@ -51,7 +51,7 @@ function MyNavbar() {
             <Nav.Link
               className="navLink"
               as={Link}
-              to="/Products_Listing/"
+              to="/"
               // onClick={handleNavItemClick}
             >
               Home

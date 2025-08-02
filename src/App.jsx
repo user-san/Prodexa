@@ -60,7 +60,7 @@ function App() {
             <MyNavbar />
             <div className="main">
               <Routes>
-                <Route path="/Products_Listing/" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/login/:newUser" element={<Login />} />
                 {/*receiving user as parameter*/}
                 <Route path="/todoapp" element={<ToDoApp />} />

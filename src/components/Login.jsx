@@ -9,7 +9,9 @@ const Login = () => {
   return (
     <div>
       <h1>Login-{newUser}</h1>
-      <button id="myButton" onClick={handleNavigate}>Home</button>
+      <button id="myButton" onClick={handleNavigate}>
+        Home
+      </button>
     </div>
   );
 };
