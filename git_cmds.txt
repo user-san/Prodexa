@@ -35,4 +35,4 @@ git push
 
 📢 for host the page:
 
-npm run deploy
+  ----- npm run deploy

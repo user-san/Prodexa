@@ -1,8 +1,9 @@
 {
-  "name": "2_components",
+  "name": "productlistingecommerce",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://san-user.github.io/Products_Listing",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
