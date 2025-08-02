@@ -23,7 +23,8 @@
 
 /* --- Product Section Container --- */
 .productSection {
-  padding: 50px;
+  padding-top: 50px;
+  padding-bottom:50px ;
   margin-top: 50px;
   display: flex;
   width: 95vw;
@@ -53,9 +54,7 @@
   transform: translateY(-15px);
   transition-duration: 1s;
   box-shadow: 0px 2px 50px rgba(132, 132, 131, 0.877);
-  
 }
-
 
 .productTitle {
   font-size: 18px;
@@ -141,4 +140,49 @@
 .pbtn {
   background: linear-gradient(to right, #1d9a0c, #858fc0c9);
   border: #1d9a0c !important;
+}
+
+/* fro swal Modal*/
+
+.my-swal-popup {
+  background: linear-gradient(to right, #acacac, #ffffffff, #b8b7b7);
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+}
+
+.my-swal-title {
+  font-size: 24px;
+  color: #797777;
+}
+
+.my-swal-confirm {
+  background: linear-gradient(to right, #1d9a0c, #858fc0c9) !important;
+  color: white !important;
+  border-radius: 5px !important;
+}
+
+.my-swal-cancel {
+  background: linear-gradient(to right, #ff0000, #858fc0c9) !important;
+  color: white !important;
+  border-radius: 5px !important;
+}
+.my-swal-confirm :active {
+  transform: translateY(1px) scale(0.9) !important;
+}
+.my-swal-cancel:active {
+  transform: translateY(1px) scale(0.9) !important;
+}
+
+.swal-custom-btn {
+  background: linear-gradient(to right, #0c8c9a, #858fc0c9) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.swal-custom-btn:active {
+  transform: translateY(1px) scale(0.9) !important;
+}
+/*  Mobile-friendly */
+@media (max-width: 900px) {
+  
 }

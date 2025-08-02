@@ -1,0 +1,7 @@
+@media (max-width: 600px) {
+  .AddProductsMain input,
+  .AddProductsMain .MuiTypography-root,
+  .AddProductsMain button {
+    font-size: 14px !important;
+  }
+}

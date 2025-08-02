@@ -2,6 +2,7 @@ import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import useFetch from "./custom_hooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import "./AddProducts.css";
 const AddProducts = () => {
   // {
   //     "id": 1,
@@ -113,22 +114,23 @@ const AddProducts = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <Paper elevation={20} style={paperStyle}>
+    <div className="AddProductsMain">
+      <Paper elevation={20} className="AddProductMain" style={paperStyle}>
         <Typography
-          style={{
-            marginBottom: "20px",
+          sx={{
+            mb: 2,
             textAlign: "center",
-            fontSize: "30px",
+            fontSize: { xs: "20px", sm: "26px", md: "30px" },
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            flexWrap: "wrap",
           }}
         >
           Add Product
           <Button
             sx={{
-              fontSize: "14px",
+              fontSize: { xs: "12px", sm: "14px" },
               height: "30px",
               color: "black",
               "&:hover": {
@@ -151,7 +153,21 @@ const AddProducts = () => {
             label="Title"
             variant="outlined"
             fullWidth
-            inputProps={{ maxLength: 70 }}
+            inputProps={{
+              maxLength: 70,
+            }}
+            slotProps={{
+              input: {
+                sx: {
+                  fontSize: { xs: "14px", sm: "16px" },
+                },
+              },
+              inputLabel: {
+                sx: {
+                  fontSize: { xs: "14px", sm: "20px" },
+                },
+              },
+            }}
             // slotProps={{
             //   input: { maxLength: 50 },
             // }}
@@ -167,7 +183,10 @@ const AddProducts = () => {
           <Typography
             variant="caption"
             color="textSecondary"
-            style={{ textAlign: "end" }}
+            sx={{
+              fontSize: { xs: "10px", sm: "12px", md: "14px" },
+              textAlign: "end",
+            }}
           >
             Max Characters {newValues.title.length}/70
           </Typography>
@@ -177,6 +196,18 @@ const AddProducts = () => {
             label="Description"
             multiline
             maxRows={4}
+            slotProps={{
+              input: {
+                sx: {
+                  fontSize: { xs: "14px", sm: "16px" },
+                },
+              },
+              inputLabel: {
+                sx: {
+                  fontSize: { xs: "14px", sm: "20px" },
+                },
+              },
+            }}
             fullWidth
             value={newValues.description}
             onChange={handleInputs}
@@ -195,6 +226,18 @@ const AddProducts = () => {
             type="number"
             variant="outlined"
             fullWidth
+            slotProps={{
+              input: {
+                sx: {
+                  fontSize: { xs: "14px", sm: "16px" },
+                },
+              },
+              inputLabel: {
+                sx: {
+                  fontSize: { xs: "14px", sm: "20px" },
+                },
+              },
+            }}
             className="custom-number"
             sx={textBoxNoSpinner}
             value={newValues.price}
@@ -214,6 +257,18 @@ const AddProducts = () => {
                 type="number"
                 label="Rate"
                 variant="outlined"
+                slotProps={{
+                  input: {
+                    sx: {
+                      fontSize: { xs: "14px", sm: "16px" },
+                    },
+                  },
+                  inputLabel: {
+                    sx: {
+                      fontSize: { xs: "14px", sm: "20px" },
+                    },
+                  },
+                }}
                 sx={textBoxNoSpinner}
                 value={newValues.rating.rate}
                 onChange={handleInputs}
@@ -233,6 +288,18 @@ const AddProducts = () => {
                 type="number"
                 label="Count"
                 variant="outlined"
+                slotProps={{
+                  input: {
+                    sx: {
+                      fontSize: { xs: "14px", sm: "16px" },
+                    },
+                  },
+                  inputLabel: {
+                    sx: {
+                      fontSize: { xs: "14px", sm: "20px" },
+                    },
+                  },
+                }}
                 sx={textBoxNoSpinner}
                 value={newValues.rating.count}
                 onChange={handleInputs}
@@ -243,7 +310,10 @@ const AddProducts = () => {
             type="submit"
             variant="contained"
             fullWidth
-            style={{ marginBottom: "15px" }}
+            sx={{
+              fontSize: { xs: "14px", sm: "16px" },
+              py: { xs: 1, sm: 1.5 },
+            }}
           >
             Add
           </Button>

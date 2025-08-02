@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useFetch from "./custom_hooks/useFetch";
 import { ThreeDot } from "react-loading-indicators";
+import "./Home.css";
 
 const Home = () => {
   let { products } = useFetch(
@@ -16,14 +17,8 @@ const Home = () => {
   }, [products]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <h1>Home</h1>
+    <div className="Home-main">
+      <pre style={{fontSize:"60px"}}>Home</pre>
       <p>
         Total Products{" =>"}
         {loading ? (

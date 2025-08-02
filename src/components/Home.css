@@ -1,0 +1,100 @@
+.Home-main {
+  display: contents;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 450px) {
+ .Home-main pre{
+    font-size: 40px !important;
+}
+.Home-main {
+    font-size: 19px;
+}
+
+}
+
+
+.homeLoading {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 1rem;
+  /* border: #000000 solid; */
+}
+
+.project-status-card {
+  background-color: #ffffff1e;
+  border: 1px solid #6b6b6b88;
+  border-radius: 16px;
+  padding: 3rem;
+  margin: 40px auto;
+  max-width: 800px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.project-status-card h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.project-status-card p {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.status-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.status-section h3 {
+  margin-bottom: 10px;
+  color: #007bffc7;
+  font-size: 18px;
+}
+
+.status-section ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.status-section li {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.status-section > ul,
+.status-section > h3 {
+  flex-basis: 100%;
+}
+
+.footer-note {
+  margin-top: 20px;
+  font-style: italic;
+  color: #777;
+  text-align: center;
+}
+
+/*  Mobile-friendly */
+@media (max-width: 900px) {
+  .project-status-card {
+    padding: 16px;
+    margin: 20px;
+  }
+
+  .status-section {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+}
+
