@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import useFetch from "./custom_hooks/useFetch";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import "./EditProducts.css";
+import { ThreeDot } from "react-loading-indicators";
 const EditProducts = () => {
   //?ref for click enter to focus next textbox
   const descriptionRef = useRef(null);
@@ -51,12 +53,13 @@ const EditProducts = () => {
   };
 
   //!getting the product using custom hook that has API getReques
-  const { products } = useFetch(
+  const { products, loading, setLoading } = useFetch(
     "https://my-products-db-server.onrender.com/products"
   ); //for comparing
 
   let handleUpdate = (e) => {
     e.preventDefault();
+
     let duplicate = products.some(
       (product) => product.id !== id && product.title === updateProduct.title //prints false only if the product.id is equal to the clicked product id
     );
@@ -78,25 +81,19 @@ const EditProducts = () => {
       alert("ℹ️ You Changed Nothing!");
       navigate("/products", { state: { focusId: id } });
     } else {
+      setLoading(true);
       fetch(`https://my-products-db-server.onrender.com/products/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateProduct),
       }).then(() => {
-        alert("✅Product Edited Successfully!");
-        navigate("/products", { state: { focusId: id } }); //navigate with loction State or navigate State (an alternate for URL/${} parameter pass)
+        setLoading(false);
+        setTimeout(() => {
+          alert("✅Product Edited Successfully!");
+          navigate("/products", { state: { focusId: id } }); //navigate with loction State or navigate State (an alternate for URL/${} parameter pass)
+        }, 100);
       });
     }
-  };
-
-  //Styles for paper Component
-  let paperStyle = {
-    padding: "20px",
-    paddingInline: "35px",
-    width: "auto",
-    margin: "20px 20px",
-    borderRadius: "10px",
-    background: "linear-gradient(to right, #5454546d, #ffffffff, #b8b7b79a)",
   };
 
   //!function to remove the counterBar in the number textBox
@@ -113,25 +110,46 @@ const EditProducts = () => {
     };
   }
 
-  //!renders the componets only if the monitering state(updateProduct) not equal to null because we store initial value as null in declaration
-  if (updateProduct !== null) {
+  console.log(loading);
+  if (loading || updateProduct === null) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "300px",
+        }}
+      >
+        <ThreeDot
+          variant="bounce"
+          color="#0a0a0aff"
+          size="small"
+          text=""
+          textColor=""
+          speedPlus="2"
+        />
+      </div>
+    );
+  } else {
     return (
       <div>
-        <Paper elevation={20} style={paperStyle}>
+        <Paper elevation={20} className="EditProductMain">
           <Typography
-            style={{
-              marginBottom: "20px",
+            sx={{
+              mb: 2,
               textAlign: "center",
-              fontSize: "30px",
+              fontSize: { xs: "18px", sm: "26px", md: "30px" },
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
             Edit Product
             <Button
               sx={{
-                fontSize: "14px",
+                fontSize: { xs: "12px", sm: "14px" },
                 height: "30px",
                 color: "black",
                 "&:hover": {
@@ -147,14 +165,48 @@ const EditProducts = () => {
           <Grid
             component="form"
             onSubmit={handleUpdate}
-            style={{ display: "grid", gap: "20px" }}
+            style={{ display: "grid", gap: "12px" }}
           >
             <TextField
               name="title"
               label="Title"
               variant="outlined"
               fullWidth
-              inputProps={{ maxLength: "70" }}
+              inputProps={{
+                maxLength: 70,
+              }}
+              InputProps={{
+                sx: {
+                  "& .MuiInputBase-input": {
+                    padding: {
+                      xs: "6px 10px", // reduced padding on mobile
+                      sm: "16.5px 14px", // default on larger screens
+                    },
+                    fontSize: {
+                      xs: "14px",
+                      sm: "16px",
+                    },
+                  },
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: {
+                    xs: "14px",
+                    sm: "18px",
+                  },
+                  transform: {
+                    xs: "translate(20px, 7px) scale(1)", // normal state
+                    sm: "translate(14px, 16.5px) scale(1)",
+                  },
+                  "&.MuiInputLabel-shrink": {
+                    transform: {
+                      xs: "translate(20px, -9px) scale(0.75)", // when floating
+                      sm: "translate(18px, -9px) scale(0.75)",
+                    },
+                  },
+                },
+              }}
               // slotProps={{
               //   input: { maxLength: 50 },
               // }}
@@ -170,7 +222,10 @@ const EditProducts = () => {
             <Typography
               variant="caption"
               color="textSecondary"
-              style={{ textAlign: "end" }}
+              sx={{
+                fontSize: { xs: "10px", sm: "12px", md: "14px" },
+                textAlign: "end",
+              }}
             >
               Max Characters {updateProduct.title.length}/70
             </Typography>
@@ -181,6 +236,39 @@ const EditProducts = () => {
               label="Description"
               multiline
               maxRows={4}
+              className="custom-multiline-textfield"
+              InputProps={{
+                sx: {
+                  "& .MuiInputBase-input": {
+                    fontSize: {
+                      xs: "14px",
+                      sm: "16px",
+                    },
+                    lineHeight: {
+                      xs: "1.2rem", // smaller line spacing on mobile
+                      sm: "1.5rem",
+                    },
+                  },
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: {
+                    xs: "14px",
+                    sm: "18px",
+                  },
+                  transform: {
+                    xs: "translate(20px, 7px) scale(1)", // normal state
+                    sm: "translate(14px, 16.5px) scale(1)",
+                  },
+                  "&.MuiInputLabel-shrink": {
+                    transform: {
+                      xs: "translate(20px, -9px) scale(0.75)", // when floating
+                      sm: "translate(22px, -9px) scale(0.75)",
+                    },
+                  },
+                },
+              }}
               fullWidth
               value={updateProduct.description}
               onChange={handleInputs}
@@ -199,6 +287,38 @@ const EditProducts = () => {
               type="number"
               variant="outlined"
               fullWidth
+              InputProps={{
+                sx: {
+                  "& .MuiInputBase-input": {
+                    padding: {
+                      xs: "6px 10px", // reduced padding on mobile
+                      sm: "16.5px 14px", // default on larger screens
+                    },
+                    fontSize: {
+                      xs: "14px",
+                      sm: "16px",
+                    },
+                  },
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: {
+                    xs: "14px",
+                    sm: "18px",
+                  },
+                  transform: {
+                    xs: "translate(20px, 7px) scale(1)", // normal state
+                    sm: "translate(14px, 16.5px) scale(1)",
+                  },
+                  "&.MuiInputLabel-shrink": {
+                    transform: {
+                      xs: "translate(20px, -9px) scale(0.75)", // when floating
+                      sm: "translate(18px, -9px) scale(0.75)",
+                    },
+                  },
+                },
+              }}
               className="custom-number"
               sx={textBoxNoSpinner}
               value={updateProduct.price}
@@ -218,6 +338,38 @@ const EditProducts = () => {
                   type="number"
                   label="Rate"
                   variant="outlined"
+                  InputProps={{
+                    sx: {
+                      "& .MuiInputBase-input": {
+                        padding: {
+                          xs: "6px 10px", // reduced padding on mobile
+                          sm: "16.5px 14px", // default on larger screens
+                        },
+                        fontSize: {
+                          xs: "14px",
+                          sm: "16px",
+                        },
+                      },
+                    },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      fontSize: {
+                        xs: "14px",
+                        sm: "18px",
+                      },
+                      transform: {
+                        xs: "translate(20px, 7px) scale(1)", // normal state
+                        sm: "translate(14px, 16.5px) scale(1)",
+                      },
+                      "&.MuiInputLabel-shrink": {
+                        transform: {
+                          xs: "translate(20px, -9px) scale(0.75)", // when floating
+                          sm: "translate(18px, -9px) scale(0.75)",
+                        },
+                      },
+                    },
+                  }}
                   sx={textBoxNoSpinner}
                   value={updateProduct.rating.rate}
                   onChange={handleInputs}
@@ -237,6 +389,38 @@ const EditProducts = () => {
                   type="number"
                   label="Count"
                   variant="outlined"
+                  InputProps={{
+                    sx: {
+                      "& .MuiInputBase-input": {
+                        padding: {
+                          xs: "6px 10px", // reduced padding on mobile
+                          sm: "16.5px 14px", // default on larger screens
+                        },
+                        fontSize: {
+                          xs: "14px",
+                          sm: "16px",
+                        },
+                      },
+                    },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      fontSize: {
+                        xs: "14px",
+                        sm: "18px",
+                      },
+                      transform: {
+                        xs: "translate(20px, 7px) scale(1)", // normal state
+                        sm: "translate(14px, 16.5px) scale(1)",
+                      },
+                      "&.MuiInputLabel-shrink": {
+                        transform: {
+                          xs: "translate(20px, -9px) scale(0.75)", // when floating
+                          sm: "translate(18px, -9px) scale(0.75)",
+                        },
+                      },
+                    },
+                  }}
                   sx={textBoxNoSpinner}
                   value={updateProduct.rating.count}
                   onChange={handleInputs}
@@ -247,7 +431,10 @@ const EditProducts = () => {
               type="submit"
               variant="contained"
               fullWidth
-              style={{ marginBottom: "15px" }}
+              sx={{
+                fontSize: { xs: "14px", sm: "16px" },
+                py: { xs: 0.2, sm: 0.5 },
+              }}
             >
               Change
             </Button>

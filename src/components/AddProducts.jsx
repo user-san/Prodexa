@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import useFetch from "./custom_hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import "./AddProducts.css";
+import { ThreeDot } from "react-loading-indicators";
 const AddProducts = () => {
   // {
   //     "id": 1,
@@ -52,17 +53,22 @@ const AddProducts = () => {
       });
     }
   };
+  const [loading, setLoading] = useState(false);
+  const { products } = useFetch(
+    "https://my-products-db-server.onrender.com/products"
+  );
 
-  const { products } = useFetch("https://fakestoreapi.com/products");
   let handleAdd = (e) => {
     e.preventDefault();
+    // console.log(finalValues);
+    // console.log(products);
+    let normalize = (str) => str.trim().replace(/\s+/g, " ").toLowerCase();
+
     let duplicate = products.some(
-      (product) => product.title === finalValues.title
+      (product) => normalize(product.title) == normalize(finalValues.title)
     );
-    console.log(duplicate);
-    if (duplicate) {
-      alert("NO DUPLICATE: Product already Available!");
-    } else if (
+    // console.log(duplicate);
+    if (
       newValues.title === "" ||
       newValues.price === "" ||
       newValues.description === "" ||
@@ -70,32 +76,29 @@ const AddProducts = () => {
       newValues.rating.count === ""
     ) {
       alert("Please fill all the details!");
+    } else if (duplicate) {
+      alert("NO DUPLICATE: Product already Available!");
     } else {
+      setLoading(true);
       fetch("https://my-products-db-server.onrender.com/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(finalValues),
       }).then(() => {
-        alert("Data Added Successfully!");
-        setNewValues({
-          title: "",
-          price: "",
-          description: "",
-          category: "",
-          image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-          rating: { rate: "", count: "" },
-        });
+        setLoading(false);
+        setTimeout(() => {
+          alert("Data Added Successfully!");
+          setNewValues({
+            title: "",
+            price: "",
+            description: "",
+            category: "",
+            image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            rating: { rate: "", count: "" },
+          });
+        }, 100);
       });
     }
-  };
-
-  let paperStyle = {
-    padding: "20px",
-    paddingInline: "35px",
-    width: "auto",
-    margin: "20px 20px",
-    borderRadius: "10px",
-    background: "linear-gradient(to right, #5454546d, #ffffffff, #b8b7b79a)",
   };
 
   function textBoxNoSpinner() {
@@ -112,213 +115,341 @@ const AddProducts = () => {
   }
 
   const navigate = useNavigate();
-
   return (
-    <div className="AddProductsMain">
-      <Paper elevation={20} className="AddProductMain" style={paperStyle}>
-        <Typography
-          sx={{
-            mb: 2,
-            textAlign: "center",
-            fontSize: { xs: "20px", sm: "26px", md: "30px" },
+    <div style={{ position: "relative" }}>
+      {loading && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 10,
+            backgroundColor: "transparent",
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
-            flexWrap: "wrap",
           }}
         >
-          Add Product
-          <Button
-            sx={{
-              fontSize: { xs: "12px", sm: "14px" },
-              height: "30px",
-              color: "black",
-              "&:hover": {
-                backgroundColor: "#757171ff",
-                boxShadow: "none",
-              },
-            }}
-            onClick={() => navigate("/products")}
-          >
-            Back
-          </Button>
-        </Typography>
-        <Grid
-          component="form"
-          onSubmit={handleAdd}
-          style={{ display: "grid", gap: "20px" }}
-        >
-          <TextField
-            name="title"
-            label="Title"
-            variant="outlined"
-            fullWidth
-            inputProps={{
-              maxLength: 70,
-            }}
-            slotProps={{
-              input: {
-                sx: {
-                  fontSize: { xs: "14px", sm: "16px" },
-                },
-              },
-              inputLabel: {
-                sx: {
-                  fontSize: { xs: "14px", sm: "20px" },
-                },
-              },
-            }}
-            // slotProps={{
-            //   input: { maxLength: 50 },
-            // }}
-            value={newValues.title}
-            onChange={handleInputs}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                descriptionRef.current?.focus();
-              }
-            }}
+          <ThreeDot
+            variant="bounce"
+            color="#0a0a0aff"
+            size="small"
+            text=""
+            textColor=""
+            speedPlus="2"
           />
+        </div>
+      )}
+
+      <div>
+        <Paper elevation={20} className="AddProductMain">
           <Typography
-            variant="caption"
-            color="textSecondary"
             sx={{
-              fontSize: { xs: "10px", sm: "12px", md: "14px" },
-              textAlign: "end",
+              mb: 2,
+              textAlign: "center",
+              fontSize: { xs: "18px", sm: "26px", md: "30px" },
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
-            Max Characters {newValues.title.length}/70
+            Add Product
+            <Button
+              sx={{
+                fontSize: { xs: "12px", sm: "14px" },
+                height: "30px",
+                color: "black",
+                "&:hover": {
+                  backgroundColor: "#757171ff",
+                  boxShadow: "none",
+                },
+              }}
+              onClick={() => navigate("/products")}
+            >
+              Back
+            </Button>
           </Typography>
-          <TextField
-            inputRef={descriptionRef}
-            name="description"
-            label="Description"
-            multiline
-            maxRows={4}
-            slotProps={{
-              input: {
-                sx: {
-                  fontSize: { xs: "14px", sm: "16px" },
-                },
-              },
-              inputLabel: {
-                sx: {
-                  fontSize: { xs: "14px", sm: "20px" },
-                },
-              },
-            }}
-            fullWidth
-            value={newValues.description}
-            onChange={handleInputs}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                priceRef.current?.focus();
-              }
-            }}
-          />
-
-          <TextField
-            inputRef={priceRef}
-            name="price"
-            label="Price"
-            type="number"
-            variant="outlined"
-            fullWidth
-            slotProps={{
-              input: {
-                sx: {
-                  fontSize: { xs: "14px", sm: "16px" },
-                },
-              },
-              inputLabel: {
-                sx: {
-                  fontSize: { xs: "14px", sm: "20px" },
-                },
-              },
-            }}
-            className="custom-number"
-            sx={textBoxNoSpinner}
-            value={newValues.price}
-            onChange={handleInputs}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                rateRef.current?.focus();
-              }
-            }}
-          />
-          <Grid container spacing={2}>
-            <Grid size={6}>
-              <TextField
-                inputRef={rateRef}
-                name="rating.rate"
-                type="number"
-                label="Rate"
-                variant="outlined"
-                slotProps={{
-                  input: {
-                    sx: {
-                      fontSize: { xs: "14px", sm: "16px" },
-                    },
-                  },
-                  inputLabel: {
-                    sx: {
-                      fontSize: { xs: "14px", sm: "20px" },
-                    },
-                  },
-                }}
-                sx={textBoxNoSpinner}
-                value={newValues.rating.rate}
-                onChange={handleInputs}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    countRef.current?.focus();
-                  }
-                }}
-              />
-            </Grid>
-
-            <Grid size={6}>
-              <TextField
-                inputRef={countRef}
-                name="rating.count"
-                type="number"
-                label="Count"
-                variant="outlined"
-                slotProps={{
-                  input: {
-                    sx: {
-                      fontSize: { xs: "14px", sm: "16px" },
-                    },
-                  },
-                  inputLabel: {
-                    sx: {
-                      fontSize: { xs: "14px", sm: "20px" },
-                    },
-                  },
-                }}
-                sx={textBoxNoSpinner}
-                value={newValues.rating.count}
-                onChange={handleInputs}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            sx={{
-              fontSize: { xs: "14px", sm: "16px" },
-              py: { xs: 1, sm: 1.5 },
-            }}
+          <Grid
+            component="form"
+            onSubmit={handleAdd}
+            style={{ display: "grid", gap: "12px" }}
           >
-            Add
-          </Button>
-        </Grid>
-      </Paper>
+            <TextField
+              name="title"
+              label="Title"
+              variant="outlined"
+              fullWidth
+              inputProps={{
+                maxLength: 70,
+              }}
+              InputProps={{
+                sx: {
+                  "& .MuiInputBase-input": {
+                    padding: {
+                      xs: "6px 10px", // reduced padding on mobile
+                      sm: "16.5px 14px", // default on larger screens
+                    },
+                    fontSize: {
+                      xs: "14px",
+                      sm: "16px",
+                    },
+                  },
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: {
+                    xs: "14px",
+                    sm: "18px",
+                  },
+                  transform: {
+                    xs: "translate(20px, 7px) scale(1)", // normal state
+                    sm: "translate(14px, 16.5px) scale(1)",
+                  },
+                  "&.MuiInputLabel-shrink": {
+                    transform: {
+                      xs: "translate(20px, -9px) scale(0.75)", // when floating
+                      sm: "translate(18px, -9px) scale(0.75)",
+                    },
+                  },
+                },
+              }}
+              // slotProps={{
+              //   input: { maxLength: 50 },
+              // }}
+              value={newValues.title}
+              onChange={handleInputs}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  descriptionRef.current?.focus();
+                }
+              }}
+            />
+            <Typography
+              variant="caption"
+              color="textSecondary"
+              sx={{
+                fontSize: { xs: "10px", sm: "12px", md: "14px" },
+                textAlign: "end",
+              }}
+            >
+              Max Characters {newValues.title.length}/70
+            </Typography>
+            <TextField
+              inputRef={descriptionRef}
+              name="description"
+              label="Description"
+              multiline
+              maxRows={4}
+              className="custom-multiline-textfield"
+              InputProps={{
+                sx: {
+                  "& .MuiInputBase-input": {
+                    padding: {
+                      xs: "6px 10px", // reduced padding on mobile
+                      sm: "16.5px 14px", // default on larger screens
+                    },
+                    fontSize: {
+                      xs: "14px",
+                      sm: "16px",
+                    },
+                  },
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: {
+                    xs: "14px",
+                    sm: "18px",
+                  },
+                  transform: {
+                    xs: "translate(20px, 7px) scale(1)", // normal state
+                    sm: "translate(14px, 16.5px) scale(1)",
+                  },
+                  "&.MuiInputLabel-shrink": {
+                    transform: {
+                      xs: "translate(20px, -9px) scale(0.75)", // when floating
+                      sm: "translate(22px, -9px) scale(0.75)",
+                    },
+                  },
+                },
+              }}
+              fullWidth
+              value={newValues.description}
+              onChange={handleInputs}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  priceRef.current?.focus();
+                }
+              }}
+            />
+
+            <TextField
+              inputRef={priceRef}
+              name="price"
+              label="Price"
+              type="number"
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                sx: {
+                  "& .MuiInputBase-input": {
+                    padding: {
+                      xs: "6px 10px", // reduced padding on mobile
+                      sm: "16.5px 14px", // default on larger screens
+                    },
+                    fontSize: {
+                      xs: "14px",
+                      sm: "16px",
+                    },
+                  },
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: {
+                    xs: "14px",
+                    sm: "18px",
+                  },
+                  transform: {
+                    xs: "translate(20px, 7px) scale(1)", // normal state
+                    sm: "translate(14px, 16.5px) scale(1)",
+                  },
+                  "&.MuiInputLabel-shrink": {
+                    transform: {
+                      xs: "translate(20px, -9px) scale(0.75)", // when floating
+                      sm: "translate(18px, -9px) scale(0.75)",
+                    },
+                  },
+                },
+              }}
+              className="custom-number"
+              sx={textBoxNoSpinner}
+              value={newValues.price}
+              onChange={handleInputs}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  rateRef.current?.focus();
+                }
+              }}
+            />
+            <Grid container spacing={2}>
+              <Grid size={6}>
+                <TextField
+                  inputRef={rateRef}
+                  name="rating.rate"
+                  type="number"
+                  label="Rate"
+                  variant="outlined"
+                  InputProps={{
+                    sx: {
+                      "& .MuiInputBase-input": {
+                        padding: {
+                          xs: "6px 10px", // reduced padding on mobile
+                          sm: "16.5px 14px", // default on larger screens
+                        },
+                        fontSize: {
+                          xs: "14px",
+                          sm: "16px",
+                        },
+                      },
+                    },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      fontSize: {
+                        xs: "14px",
+                        sm: "18px",
+                      },
+                      transform: {
+                        xs: "translate(20px, 7px) scale(1)", // normal state
+                        sm: "translate(14px, 16.5px) scale(1)",
+                      },
+                      "&.MuiInputLabel-shrink": {
+                        transform: {
+                          xs: "translate(20px, -9px) scale(0.75)", // when floating
+                          sm: "translate(18px, -9px) scale(0.75)",
+                        },
+                      },
+                    },
+                  }}
+                  sx={textBoxNoSpinner}
+                  value={newValues.rating.rate}
+                  onChange={handleInputs}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      countRef.current?.focus();
+                    }
+                  }}
+                />
+              </Grid>
+
+              <Grid size={6}>
+                <TextField
+                  inputRef={countRef}
+                  name="rating.count"
+                  type="number"
+                  label="Count"
+                  variant="outlined"
+                  InputProps={{
+                    sx: {
+                      "& .MuiInputBase-input": {
+                        padding: {
+                          xs: "6px 10px", // reduced padding on mobile
+                          sm: "16.5px 14px", // default on larger screens
+                        },
+                        fontSize: {
+                          xs: "14px",
+                          sm: "16px",
+                        },
+                      },
+                    },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      fontSize: {
+                        xs: "14px",
+                        sm: "18px",
+                      },
+                      transform: {
+                        xs: "translate(20px, 7px) scale(1)", // normal state
+                        sm: "translate(14px, 16.5px) scale(1)",
+                      },
+                      "&.MuiInputLabel-shrink": {
+                        transform: {
+                          xs: "translate(20px, -9px) scale(0.75)", // when floating
+                          sm: "translate(18px, -9px) scale(0.75)",
+                        },
+                      },
+                    },
+                  }}
+                  sx={textBoxNoSpinner}
+                  value={newValues.rating.count}
+                  onChange={handleInputs}
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                fontSize: { xs: "14px", sm: "16px" },
+                py: { xs: 0.2, sm: 0.5 },
+              }}
+            >
+              Add
+            </Button>
+          </Grid>
+        </Paper>
+      </div>
     </div>
   );
 };

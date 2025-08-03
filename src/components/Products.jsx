@@ -8,7 +8,7 @@ import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import DeleteSweepRoundedIcon from "@mui/icons-material/DeleteSweepRounded";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -72,6 +72,7 @@ const Products = () => {
   }, [focusId, products]);
 
   const navigate = useNavigate();
+  const [deleteloading, setDeleteloading] = useState(false);
 
   //?for delete
   function handelDeleteProducts(id) {
@@ -80,6 +81,7 @@ const Products = () => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
+      scrollbarPadding: false,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
@@ -93,15 +95,18 @@ const Products = () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
+        setDeleteloading(true);
         axios
           .delete(`https://my-products-db-server.onrender.com/products/${id}`)
           .then(() => {
-            setProducts(products.filter((product) => product.id !== id));
+            setDeleteloading(false);
+            let confirmed = false;
             Swal.fire({
               title: "Deleted!",
               text: "Your item has been deleted successfully.",
               icon: "success",
               showConfirmButton: true,
+              scrollbarPadding: false,
               confirmButtonText: "OK",
               timer: 3000,
               timerProgressBar: true,
@@ -110,6 +115,14 @@ const Products = () => {
                 title: "my-swal-title",
                 confirmButton: "swal-custom-btn",
               },
+              willClose: () => {
+                // This runs when the modal closes, even due to timeout
+                confirmed = true;
+              },
+            }).then(() => {
+              if (confirmed) {
+                setProducts(products.filter((product) => product.id !== id));
+              }
             });
           })
           .catch((err) => {
@@ -117,7 +130,14 @@ const Products = () => {
               title: "Error!",
               text: "Could not delete the product.",
               icon: "error",
+              scrollbarPadding: false,
+              customClass: {
+                popup: "my-swal-popup",
+                title: "my-swal-title",
+                confirmButton: "swal-custom-btn",
+              },
             });
+            setDeleteloading(false);
           });
       }
     });
@@ -145,9 +165,34 @@ const Products = () => {
     );
   } else {
     return (
-      <div>
+      <div style={{ position: "relative" }}>
+        {deleteloading && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 10,
+              backgroundColor: "rgba(0, 0, 0, 0.45)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ThreeDot
+              variant="bounce"
+              color="#000000ff"
+              size="small"
+              text=""
+              textColor=""
+              speedPlus="2"
+            />
+          </div>
+        )}
         <div className="productsHeader">
-          <h1>Products</h1>
+          <h1 className="headerText">Products</h1>
           {!error && (
             <BootstrapTooltip
               title="Click to add new Product"
@@ -183,11 +228,7 @@ const Products = () => {
                     <Card.Img
                       variant="top"
                       src={product.image}
-                      style={{
-                        paddingTop: "50px",
-                        width: "120px",
-                        height: "200px",
-                      }}
+                      className="productImage"
                       alt="Product Image"
                     />
                   </center>
@@ -206,6 +247,7 @@ const Products = () => {
                         paddingLeft: "20px",
                         fontSize: "25px",
                       }}
+                      className="productPrice"
                     >
                       ${product.price}
                     </Card.Text>

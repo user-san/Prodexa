@@ -27,7 +27,7 @@ function useFetch(url) {
         }
         fechedData();
     }, [url]);
-    return { products, setProducts, error, loading };
+    return { products, setProducts, error, loading, setLoading };
 }
 
 export default useFetch;
