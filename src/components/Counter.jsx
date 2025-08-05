@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -24,11 +24,28 @@ function Counter() {
       setCount((prevCount) => prevCount - 1);
     }
   }
+  let reducer = (state, action) => {
+    switch (action.type) {
+      case "increment":
+        return { ...state, count2: state.count2 + 1 };
+      case "decrement":
+        if (state.count2 > 0) {
+          return { ...state, count2: state.count2 - 1 };
+        }
+      case "reset":
+        return { ...state, count2: 0 };
+      default:
+        return state;
+    }
+  };
+
+  const [state, dispatch] = useReducer(reducer, { count2: 0 });
+
   return (
     <>
-      <h4 >
+      <h4>
         Counter{" => "}
-       <span className="counterText">{count}</span> 
+        <span className="counterText">{count}</span>
       </h4>
 
       <br />
@@ -46,7 +63,27 @@ function Counter() {
           Decrease3X
         </button>
         <button id="myButton" onClick={() => setCount(0)}>
-          Clear
+          Reset
+        </button>
+      </span>
+      <br />
+      <br />
+
+      <p>useReducer</p>
+      <h4>
+        Counter{" => "} {state.count2}
+      </h4>
+      <br />
+
+      <span>
+        <button id="myButton" onClick={() => dispatch({ type: "increment" })}>
+          Increase
+        </button>
+        <button id="myButton" onClick={() => dispatch({ type: "decrement" })}>
+          Decrease
+        </button>
+        <button id="myButton" onClick={() => dispatch({ type: "reset" })}>
+          Reset
         </button>
       </span>
     </>

@@ -1,4 +1,3 @@
-import Header from "./components/Header";
 import ToDoApp from "./components/ToDoApp";
 import Products from "./components/Products";
 import Home from "./components/Home";
@@ -8,9 +7,10 @@ import { useState, createContext } from "react";
 import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ProductList from "./components/ProductList";
 import AddProducts from "./components/AddProducts";
-import MyNavbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import NotFound from "./components/NotFound";
 import EditProducts from "./components/EditProducts";
+import Cart from "./components/Cart";
 
 export const ProductContext = createContext();
 export const ToDoList = createContext();
@@ -57,7 +57,7 @@ function App() {
       <ProductContext.Provider value={{ products, setProduct }}>
         <ToDoList.Provider value={{ list, setList }}>
           <Router>
-            <MyNavbar />
+            <Navbar />
             <div className="main">
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -69,6 +69,7 @@ function App() {
                 <Route path="/addproducts" element={<AddProducts />} />
                 <Route path="/counter" element={<Counter />} />
                 <Route path="/editproducts/:id" element={<EditProducts />} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

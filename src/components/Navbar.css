@@ -1,0 +1,12 @@
+header {
+  padding: 0px !important;
+  display: inline !important;
+}
+
+.CartBtn {
+  background: linear-gradient(to right, #0c8c9a, #858fc0c9) !important;
+  color: #ffffff !important;
+  width: 2.5rem !important;
+  margin-right: 10px !important;
+  border-radius: 10px !important;
+}
