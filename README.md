@@ -1,12 +1,15 @@
-# React + Vite
+# 🚧 Currently Building This Project
+ #### Hey there! 👋 I'm actively working on this product listing app. Here's the current progress:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  ### ✅ Completed Components
+    🛒 Product Listing Page with real-time data from API
+    ➕ Add Product – Create operation
+    📝 Edit Product – Update operation
+    🗑️ Delete Product – Delete operation
+    📦 All products fetched via API – Read operation
+    🔢 Simple Counter (UI Component)
+  ### 🔮 In Progress
+    🧑‍💻 Authentication System
+    📦 Cart Functionality
+    ➕ More Add & Edit Product Properties
+    📊 Admin Dashboard
