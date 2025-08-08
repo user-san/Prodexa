@@ -149,6 +149,19 @@
   border: #1d9a0c !important;
 }
 
+.productDeleteBtn:hover,
+.productEditBtn:hover,
+.pbtn:hover {
+  transform: scale(1) !important;
+}
+
+.productDeleteBtn:active,
+.productEditBtn:active,
+.pbtn:active {
+  transform: scale(0.9) !important;
+  transition: transform 0.1s ease !important;
+}
+
 /* fro swal Modal*/
 
 .my-swal-popup {

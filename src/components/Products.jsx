@@ -8,13 +8,14 @@ import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DeleteSweepRoundedIcon from "@mui/icons-material/DeleteSweepRounded";
 import axios from "axios";
 import Swal from "sweetalert2";
 import PlaylistAddRoundedIcon from "@mui/icons-material/PlaylistAddRounded";
-
 import "./Products.css";
+import { useDispatch } from "react-redux";
+import { addItem } from "../Store/cartSlice";
 
 //!BootstrapTooltip using material ui
 export const BootstrapTooltip = styled(({ className, ...props }) => (
@@ -142,6 +143,12 @@ const Products = () => {
       }
     });
   }
+
+  //?AddToCartFunction
+  const dispatch = useDispatch();
+  let addToCart = (product) => {
+    dispatch(addItem(product));
+  };
 
   if (loading) {
     return (
@@ -273,7 +280,11 @@ const Products = () => {
                         </Button>
                       </BootstrapTooltip>
                       <BootstrapTooltip title="Add to Cart" placement="top">
-                        <Button className="productBtn pbtn" variant="primary">
+                        <Button
+                          className="productBtn pbtn"
+                          variant="primary"
+                          onClick={() => addToCart(product)}
+                        >
                           <ShoppingCartRoundedIcon />
                         </Button>
                       </BootstrapTooltip>

@@ -1,0 +1,30 @@
+.cartHeading {
+  display: flex;
+  justify-content: center;
+  color: #5a7174;
+  align-items: center;
+  gap: 3rem;
+}
+.cartBackBtn {
+  background-color: gray;
+  display: inline-flex;
+  align-items: center;
+  height: 1.5rem;
+  font-size: large;
+  border: none;
+}
+.cartBackBtn:hover {
+  background-color: black;
+}
+.cartBackBtn:active {
+  background-color: black !important;
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+.emptyWarnning {
+  /* border: #5a7174 solid; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
