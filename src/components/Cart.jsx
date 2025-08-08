@@ -38,7 +38,7 @@ const Cart = () => {
       <div className="cartHeading">
         <h1>Cart</h1>
         <Button className="cartBackBtn" onClick={() => navigate("/products")}>
-          Back
+          Buy Some
         </Button>
       </div>
 
