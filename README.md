@@ -8,9 +8,9 @@
     🗑️ Delete Product – Delete operation
     📦 All products fetched via API – Read operation
     🔢 Simple Counter (UI Component)
+    📦 Cart Functionality (LocalStorage)
   ### 🔮 In Progress
     🧑‍💻 Authentication System
-    📦 Cart Functionality
     ➕ More Add & Edit Product Properties
     📊 Admin Dashboard
 ### 📸 Sample IMG
