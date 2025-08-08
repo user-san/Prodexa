@@ -31,7 +31,6 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login/:newUser" element={<Login />} />
               {/*receiving user as parameter*/}
-              <Route path="/todoapp" element={<ToDoApp />} />
               <Route path="/products" element={<Products />} />
               <Route path="/addproducts" element={<AddProducts />} />
               <Route path="/counter" element={<Counter />} />

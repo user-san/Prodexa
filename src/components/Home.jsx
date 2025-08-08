@@ -39,7 +39,7 @@ const Home = () => {
         style={{
           textAlign: "center",
           marginTop: "20px",
-          paddingInline:"40px",
+          paddingInline: "40px",
           fontSize: "14px",
           fontStyle: "italic",
           color: "#555",
@@ -72,11 +72,12 @@ const Home = () => {
               📦 All products fetched via API – <b>Read</b> operation
             </li>
             <li>🔢 Simple Counter (UI Component)</li>
+            <li>📦 Cart Functionality</li>
           </ul>
           <h3>🔮 In Progress</h3>
           <ul>
             <li>🧑‍💻 Authentication System</li>
-            <li>📦 Cart Functionality</li>
+
             <li>➕ More Add & Edit Product Properties </li>
             <li>📊 Admin Dashboard</li>
           </ul>

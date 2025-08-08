@@ -14,7 +14,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import PlaylistAddRoundedIcon from "@mui/icons-material/PlaylistAddRounded";
 import "./Products.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../Store/cartSlice";
 
 //!BootstrapTooltip using material ui
@@ -54,11 +54,11 @@ const Products = () => {
           block: "center",
         });
 
-        element.style.border = "2px solid #0c8c9a";
+        element.style.boxShadow = "0 0 0 10px #0c8c9aa9";
         element.style.scrollMarginTop = "80px";
 
         setTimeout(() => {
-          if (element) element.style.border = "";
+          if (element) element.style.boxShadow = "";
         }, 3000);
 
         clearInterval(interval); //successfull scroll
@@ -146,8 +146,16 @@ const Products = () => {
 
   //?AddToCartFunction
   const dispatch = useDispatch();
+  const cartProducts = useSelector((state) => state.Cart);
   let addToCart = (product) => {
-    dispatch(addItem(product));
+    const duplicate = cartProducts.some(
+      (cartproduct) => cartproduct.id === product.id
+    );
+    if (!duplicate) {
+      dispatch(addItem(product));
+    } else {
+      alert("⛔product is already in the Cart!");
+    }
   };
 
   if (loading) {

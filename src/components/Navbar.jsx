@@ -11,6 +11,7 @@ import Badge, { badgeClasses } from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { styled } from "@mui/material/styles";
 import "./Navbar.css";
+import { useSelector } from "react-redux";
 const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {
     top: -18px;
@@ -26,6 +27,9 @@ function MyNavbar() {
   // const handleNavItemClick = () => {
   //   setExpanded(false);
   // };
+
+  const cartProductsLength = useSelector((state) => state.Cart.length);
+  // console.log(cartProductsLength);
 
   return (
     <header>
@@ -117,7 +121,7 @@ function MyNavbar() {
                 <IconButton className="CartBtn" onClick={() => {}}>
                   <ShoppingCartIcon fontSize="medium" />
                   <CartBadge
-                    badgeContent={1}
+                    badgeContent={cartProductsLength}
                     color="primary"
                     overlap="circular"
                   />
