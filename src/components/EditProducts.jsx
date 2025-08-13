@@ -110,7 +110,7 @@ const EditProducts = () => {
     };
   }
 
-  console.log(loading);
+  // console.log(loading);
   if (loading || updateProduct === null) {
     return (
       <div
