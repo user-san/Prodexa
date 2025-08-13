@@ -35,7 +35,19 @@ const Home = () => {
           <span className="homeLoading">{products.length}</span>
         )}{" "}
       </p>
-
+      <p
+        style={{
+          textAlign: "center",
+          marginTop: "20px",
+          paddingInline: "40px",
+          fontSize: "14px",
+          fontStyle: "italic",
+          color: "#555",
+        }}
+      >
+        ⏳ Occasionally, data may take a few seconds to load from the server. If
+        it seems slow, please wait or try refreshing.
+      </p>
       <div className="project-status-card">
         <h2>🚧 Currently Building This Project</h2>
         <p>
