@@ -3,7 +3,7 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // we can't write this if condition in main body(it will works but-it will runs for every render So using useEffect)
+    // we can't write this if condition in main body(it will works but-it will runs for every render So using useEffect with count dependency)
     if (count < 0) {
       setCount(0);
     }
