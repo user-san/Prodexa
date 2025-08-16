@@ -29,7 +29,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login/:newUser" element={<Login />} />
-              {/*receiving user as parameter*/}
+              {/*sending user as parameter*/}
               <Route path="/products" element={<Products />} />
               <Route path="/addproducts" element={<AddProducts />} />
               <Route path="/counter" element={<Counter />} />

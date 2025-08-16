@@ -21,7 +21,7 @@ const CartBadge = styled(Badge)`
   }
 `;
 function MyNavbar() {
-  const user = "sandy";
+  const user = "routeParameter";
 
   // const [expanded, setExpanded] = useState(false);
   // const handleNavItemClick = () => {
