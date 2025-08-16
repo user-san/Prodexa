@@ -74,12 +74,20 @@ const Home = () => {
             <li>🔢 Simple Counter (UI Component)</li>
             <li>📦 Cart Functionality</li>
           </ul>
+
           <h3>🔮 In Progress</h3>
           <ul>
             <li>🧑‍💻 Authentication System</li>
-
             <li>➕ More Add & Edit Product Properties </li>
             <li>📊 Admin Dashboard</li>
+          </ul>
+
+          <h3>🛠️ Future Enhancements</h3>
+          <ul>
+            <li>💳 Demo Payments Integration</li>
+            <li>✨ Improved Cart Animations</li>
+            <li>📱 More Mobile-Responsive UI Optimizations</li>
+            <li>⭐ Wishlist & Favorites Feature</li>
           </ul>
         </div>
 

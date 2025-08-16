@@ -1,4 +1,3 @@
-import ToDoApp from "./components/ToDoApp";
 import Products from "./components/Products";
 import Home from "./components/Home";
 import Login from "./components/Login";
