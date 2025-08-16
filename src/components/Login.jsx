@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 const Login = () => {
-  const navigate = useNavigate(); // instead od link useNavigate can be used
+  const navigate = useNavigate(); // instead of link useNavigate can be used to navigate programatically
   const { newUser } = useParams();
 
   const handleNavigate = () => {

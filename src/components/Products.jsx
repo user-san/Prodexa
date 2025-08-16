@@ -69,7 +69,7 @@ const Products = () => {
       }
     }, 100);
 
-    return () => clearInterval(interval); // clean up function (used whenever we use asyncronous methods in a useEffect, then only it will stop the ongoing async task and run freshly for new dependency changes )
+    return () => clearInterval(interval);
   }, [focusId, products]);
 
   const navigate = useNavigate();

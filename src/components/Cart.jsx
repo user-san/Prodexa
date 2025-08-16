@@ -8,15 +8,7 @@ import { deleteItem } from "../Store/cartSlice";
 import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 
-//!web Storage API
-//--localStorage -- alive until a manual delete
-//--sessionStorage -- alive until the web application alive
-//--cookieStore -- alive until a provide time if not act as sessionStorage
-//!example
-// localStorage.setItem("Cart",JSON.stringify([{id:1}]));
-// const dataFromWeb = JSON.parse(localStorage.getItem("Cart"));
-// console.log(dataFromWeb,typeof dataFromWeb);
-// localStorage.removeItem("Cart");
+
 //?LocalStorage Creation
 if (!localStorage.getItem("Cart")) {
   // if the localStorage is already created it do not create a new one
