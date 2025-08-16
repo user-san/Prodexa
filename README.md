@@ -13,5 +13,12 @@
     🧑‍💻 Authentication System
     ➕ More Add & Edit Product Properties
     📊 Admin Dashboard
+
+ ### 🛠️ Future Enhancements
+    💳 Demo Payments Integration
+    ✨ Improved Cart Animations
+    📱 More Mobile-Responsive UI Optimizations
+    ⭐ Wishlist & Favorites Feature
+    
 ### 📸 Sample IMG
 <img width="2146" height="1190" alt="image" src="https://github.com/user-attachments/assets/ffcb0cf2-5863-4e15-b1ec-1a1823346b77" />
