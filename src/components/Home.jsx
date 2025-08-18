@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <div className="Home-main">
-      <pre style={{ fontSize: "60px" }}>Home</pre>
+      <h1 className="homeTitle">Home</h1>
       <p>
         Total Products{" =>"}
         {loading ? (

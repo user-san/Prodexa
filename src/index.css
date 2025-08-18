@@ -19,7 +19,6 @@ body {
   background: linear-gradient(to right, #ffffff, #7a7979);
 }
 
-
 .App {
   display: flex;
   flex-direction: column;
@@ -29,16 +28,6 @@ body {
   width: 100%;
   max-width: auto;
   margin: auto;
-}
-
-header {
-  width: 100%;
-  padding: 15px;
-  background: linear-gradient(to right, #b7bab7, #000000);
-  color: rgba(0, 0, 0, 0.687);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .main {
@@ -54,162 +43,7 @@ header {
   padding-top: 50px;
 }
 
-footer {
-  width: 100%;
-  padding-right: 5%;
-  background: linear-gradient(to right, #1d9a0c, #000000);
-  color: gray;
-  font-size: 15px;
-  display: grid;
-  text-align: end;
-}
-
-#myButton,
-#btn {
-  font-size: 14.5px;
-  border-radius: 20px;
-  width: 90px;
-  height: 30px;
-  text-align: center;
-  background-color: rgba(62, 62, 62, 0.767);
-  border-style: hidden;
-  margin-inline-start: 10px;
-}
-
-#myButton:hover,
-#btn:hover {
-  background: linear-gradient(to right, #717171, #e0e085);
-}
-
-#myButton:active,
-#btn:active {
-  transform: translateY(1px) scale(0.99);
-}
-
-#showList td,
-#showList th {
-  border-style: solid;
-  border-width: 0.2px;
-  text-align: center;
-  padding: 10px;
-}
-
-#showList {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-#formTable td {
-  padding-left: 20px;
-  padding-bottom: 15px;
-}
-
-#formTable #btn {
-  margin-left: 50%;
-  margin-top: 20px;
-}
-
-#textBox {
-  height: 30px;
-  border-radius: 20px;
-  padding-inline: 20px;
-  outline-style: none;
-  font-size: medium;
-}
-
-#edit {
-  color: rgb(94, 94, 94);
-  margin-left: 15px;
-  border: none;
-}
-#delete {
-  color: rgb(108, 108, 108);
-  margin-inline: 10px;
-  border: none;
-}
-
-#delete:hover {
-  color: rgb(185, 38, 38);
-}
-
-#edit:hover {
-  color: rgb(35, 105, 203);
-}
-
-li {
-  padding-bottom: 15px;
-}
-
-ul {
-  list-style: none;
-}
-
-#link {
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #717171;
-  padding: 5px 30px;
-  margin-right: 30px;
-  border-radius: 50px;
-}
-
-#link:hover {
-  background: linear-gradient(to right, #717171, #ebeb0a);
-}
-
-#link:active {
-  transform: translateY(1px) scale(0.99);
-}
-
-.navbar {
-  background: linear-gradient(to right, #6d6c6c, #dedede);
-  z-index: 1030;
-}
-
-.navbar .navbar::after {
-  content: "";
-  position: absolute;
-  bottom: -25px; /* Extend below navbar */
-  left: 0;
-  right: 0;
-  height: 25px;
-
-  /* Blur with fading opacity */
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  /* Gradient mask for smooth dissolve */
-  mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-
-  pointer-events: none;
-  z-index: -1;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(241, 13, 13, 0) 10%
-  );
-}
-.navLink {
-  color: #c2c1c1;
-}
-
-.me-2 {
-  background: linear-gradient(to right, #6d6c6c, #6c6c6cc9);
-  border-color: #c2c1c1;
-}
-
-/* styles.css */
+/* scollbar style */
 ::-webkit-scrollbar {
   width: 8px;
   height: 12px;
@@ -230,9 +64,6 @@ ul {
   background-color: #ffffff;
   border: none;
 }
-
-
-
 
 .counterText {
   display: inline-flex;

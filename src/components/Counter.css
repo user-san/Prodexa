@@ -1,0 +1,33 @@
+h4 {
+  color: #5a7174 !important;
+}
+.btnGroup {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.counterBtn {
+  color: rgb(0, 0, 0);
+  padding: 7px;
+  padding-inline: 20px;
+  border-radius: 20px;
+  font-size: large;
+  border: 1px #4a4a4a solid;
+  background: linear-gradient(to right, #26a5b4, #7387ed96);
+}
+.counterBtn:hover {
+  /* border: 1px #ffffff solid; */
+  color: rgb(255, 255, 255);
+  background: linear-gradient(to right, #26a5b4, #0d30de96);
+}
+.counterBtn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+@media (max-width: 767.98px) {
+  .counterBtn {
+    font-size: 10px;
+  }
+}

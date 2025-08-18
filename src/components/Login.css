@@ -1,0 +1,33 @@
+h3{
+   color: #5a7174 !important;
+}
+.logBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loginBtn {
+  padding-inline: 20px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(to right, #26a5b4, #7387ed96);
+}
+.loginBtn:hover {
+  background: linear-gradient(to right, #26a5b4, #0d30de96);
+}
+.loginBtn:active {
+  transform: translateY(1px) scale(0.99);
+}
+@media (max-width: 767.98px) {
+  .logBody h3 {
+    font-size: 25px !important;
+  }
+  .loginBtn {
+    font-size: 20px !important;
+    padding-inline: 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(62, 62, 62, 0.767);
+  }
+}

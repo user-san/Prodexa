@@ -5,15 +5,17 @@
 }
 
 @media (max-width: 450px) {
- .Home-main pre{
+  .Home-main pre {
     font-size: 40px !important;
-}
-.Home-main {
+  }
+  .Home-main {
     font-size: 19px;
+  }
 }
 
+.homeTitle {
+  color: #5a7174;
 }
-
 
 .homeLoading {
   display: inline-flex;
@@ -95,6 +97,4 @@
     flex-direction: column;
     gap: 16px;
   }
-
 }
-

@@ -1,4 +1,5 @@
 import { useState, useEffect, useReducer } from "react";
+import "./Counter.css";
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -48,23 +49,23 @@ function Counter() {
       </h4>
 
       <br />
-      <span>
-        <button id="myButton" onClick={() => setCount(count + 1)}>
+      <div className="btnGroup">
+        <button className="counterBtn" onClick={() => setCount(count + 1)}>
           Increase
         </button>
-        <button id="myButton" onClick={() => setCount(count - 1)}>
+        <button className="counterBtn" onClick={() => setCount(count - 1)}>
           Decrease
         </button>
-        <button id="myButton" onClick={() => handleIncrease3X()}>
+        <button className="counterBtn" onClick={() => handleIncrease3X()}>
           Increase3X
         </button>
-        <button id="myButton" onClick={handleDecrease3X}>
+        <button className="counterBtn" onClick={handleDecrease3X}>
           Decrease3X
         </button>
-        <button id="myButton" onClick={() => setCount(0)}>
+        <button className="counterBtn" onClick={() => setCount(0)}>
           Reset
         </button>
-      </span>
+      </div>
       <br />
       <br />
 
@@ -74,17 +75,26 @@ function Counter() {
       </h4>
       <br />
 
-      <span>
-        <button id="myButton" onClick={() => dispatch({ type: "increment" })}>
+      <div className="btnGroup">
+        <button
+          className="counterBtn"
+          onClick={() => dispatch({ type: "increment" })}
+        >
           Increase
         </button>
-        <button id="myButton" onClick={() => dispatch({ type: "decrement" })}>
+        <button
+          className="counterBtn"
+          onClick={() => dispatch({ type: "decrement" })}
+        >
           Decrease
         </button>
-        <button id="myButton" onClick={() => dispatch({ type: "reset" })}>
+        <button
+          className="counterBtn"
+          onClick={() => dispatch({ type: "reset" })}
+        >
           Reset
         </button>
-      </span>
+      </div>
     </>
   );
 }

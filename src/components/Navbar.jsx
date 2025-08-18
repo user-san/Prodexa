@@ -1,8 +1,8 @@
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { MdOutlineOfflineBolt } from "react-icons/md";
@@ -12,6 +12,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { styled } from "@mui/material/styles";
 import "./Navbar.css";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {
     top: -18px;
@@ -20,118 +21,106 @@ const CartBadge = styled(Badge)`
     color: white;
   }
 `;
+
 function MyNavbar() {
   const user = "routeParameter";
-
-  // const [expanded, setExpanded] = useState(false);
-  // const handleNavItemClick = () => {
-  //   setExpanded(false);
-  // };
-
   const cartProductsLength = useSelector((state) => state.Cart.length);
-  // console.log(cartProductsLength);
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        // md breakpoint
+        setExpanded(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <header>
-      {" "}
-      <Navbar
-        expand="lg"
-        className="navbar "
-        // expanded={expanded}
-        // onToggle={(isOpen) => setExpanded(isOpen)}
-        style={{
-          backgroundColor: "#fff",
-          boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-        }}
-      >
-        <Container fluid>
-          <Navbar.Brand
-            style={{
-              cursor: "default",
-              color: "#212121ff",
-              fontSize: "30px",
-              marginRight: "15px",
-            }}
-          >
-            <MdOutlineOfflineBolt
-              style={{
-                marginRight: "10px",
-                padding: "none",
-                color: "#212121ff",
-              }}
-            />
-            Prodexa
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "200px" }}
-              navbarScroll
-            >
+    <Navbar
+      expand="md"
+      sticky="top"
+      className="navbar mb-3"
+      expanded={expanded}
+      onToggle={(isOpen) => setExpanded(isOpen)}
+    >
+      <Container fluid>
+        <Navbar.Brand className="navbar-brand">
+          <MdOutlineOfflineBolt className="brand-icon" />
+          Prodexa
+        </Navbar.Brand>
+
+        <Navbar.Toggle
+          aria-controls="offcanvasNavbar-expand-md"
+          className="navbar-toggle"
+        />
+
+        <Navbar.Offcanvas
+          id="offcanvasNavbar-expand-md"
+          aria-labelledby="offcanvasNavbarLabel-expand-md"
+          placement="end"
+          className="offcanvas-md"
+        >
+          <Offcanvas.Header closeButton className="offcanvas-header">
+            <Offcanvas.Title id="offcanvasNavbarLabel-expand-md">
+              <MdOutlineOfflineBolt className="offcanvas-brand-icon" />
+              Prodexa
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+
+          <Offcanvas.Body className="offcanvas-body">
+            <Nav className="justify-content-end flex-grow-1 pe-3">
               <Nav.Link
-                className="navLink"
                 as={Link}
                 to="/"
-                // onClick={handleNavItemClick}
+                className="nav-link"
+                onClick={() => setExpanded(false)}
               >
                 Home
               </Nav.Link>
               <Nav.Link
-                className="navLink"
                 as={Link}
                 to={`/login/${user}`}
-                // onClick={handleNavItemClick}
+                className="nav-link"
+                onClick={() => setExpanded(false)}
               >
-                {/*sending parameter*/}
                 Login
               </Nav.Link>
               <Nav.Link
-                className="navLink"
                 as={Link}
                 to="/counter"
-                // onClick={handleNavItemClick}
+                className="nav-link"
+                onClick={() => setExpanded(false)}
               >
                 Counter
               </Nav.Link>
               <Nav.Link
-                className="navLink"
                 as={Link}
                 to="/products"
-                // onClick={handleNavItemClick}
+                className="nav-link"
+                onClick={() => setExpanded(false)}
               >
                 Products
               </Nav.Link>
             </Nav>
-            <Form className="d-flex">
-              {/* <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button
-              style={{ color: "#ffffffff", borderColor: "#ffffffff" }}
-              variant="outline-dark"
-              // onClick={handleNavItemClick}
-            >
-              Search
-            </Button> */}
-              <Link to="/cart">
-                <IconButton className="CartBtn" onClick={() => {}}>
-                  <ShoppingCartIcon fontSize="medium" />
-                  <CartBadge
-                    badgeContent={cartProductsLength}
-                    color="primary"
-                    overlap="circular"
-                  />
-                </IconButton>
-              </Link>
-            </Form>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </header>
+
+            <Link to="/cart" onClick={() => setExpanded(false)}>
+              <IconButton className="cart-btn">
+                <ShoppingCartIcon fontSize="medium" />
+                <CartBadge
+                  badgeContent={cartProductsLength}
+                  color="primary"
+                  overlap="circular"
+                />
+              </IconButton>
+            </Link>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Container>
+    </Navbar>
   );
 }
 
