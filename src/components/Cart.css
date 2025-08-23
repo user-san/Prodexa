@@ -28,3 +28,20 @@
   align-items: center;
   justify-content: center;
 }
+
+/* --- Product Section Container --- */
+.CartProductsSection {
+  padding-top: 10px;
+  padding-bottom: 50px;
+  display: flex;
+  width: 95vw;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
+  overflow: hidden;
+  /* border: #0c8c9a solid; */
+}
+
+

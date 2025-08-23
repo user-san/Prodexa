@@ -18,7 +18,7 @@ const EditProducts = () => {
   //!reciving parameter
   const { id } = useParams();
 
-  const intitialProductDetails = useRef(null); //used to compare if any changes made
+  const initialProductDetails = useRef(null); //used to compare if any changes made
 
   const [updateProduct, setUpdateProducts] = useState(null); //state moitor input data and display the product want to edit
 
@@ -27,7 +27,7 @@ const EditProducts = () => {
     axios
       .get(`https://my-products-db-server.onrender.com/products/${id}`)
       .then((res) => {
-        intitialProductDetails.current = res.data;
+        initialProductDetails.current = res.data;
         setUpdateProducts(res.data); // display it to textbox using handel input function
       });
   }, [id]);
@@ -52,47 +52,59 @@ const EditProducts = () => {
     }
   };
 
-  //!getting the product using custom hook that has API getReques
+  //!getting the product using custom hook that has API getRequest
   const { products, loading, setLoading } = useFetch(
     "https://my-products-db-server.onrender.com/products"
   ); //for comparing
 
-  let handleUpdate = (e) => {
+  let handleUpdate = async (e) => {
     e.preventDefault();
 
     let duplicate = products.some(
-      (product) => product.id !== id && product.title === updateProduct.title //prints false only if the product.id is equal to the clicked product id
+      (product) =>
+        product.id.toString() !== id.toString() &&
+        product.title.trim().toLowerCase() ===
+          updateProduct.title.trim().toLowerCase()
     );
-
-    if (duplicate) {
-      alert("❌NO DUPLICATE: Product Title already Available!");
-    } else if (
-      updateProduct.title === "" ||
-      updateProduct.price === "" ||
-      updateProduct.description === "" ||
-      updateProduct.rating.rate === "" ||
-      updateProduct.rating.count === ""
-    ) {
-      alert("⚠️Please fill all the details!");
-    } else if (
+    if (
       JSON.stringify(updateProduct) ===
-      JSON.stringify(intitialProductDetails.current)
+      JSON.stringify(initialProductDetails.current)
     ) {
       alert("ℹ️ You Changed Nothing!");
       navigate("/products", { state: { focusId: id } });
-    } else {
+      return;
+    }
+
+    if (duplicate) {
+      alert("❌ Product Title already exists!");
+      return;
+    }
+
+    if (
+      !updateProduct.title.trim() ||
+      !updateProduct.price ||
+      !updateProduct.description.trim() ||
+      !updateProduct.rating.rate ||
+      !updateProduct.rating.count
+    ) {
+      alert("⚠️Please fill all the details!");
+      return;
+    }
+
+    try {
       setLoading(true);
-      fetch(`https://my-products-db-server.onrender.com/products/${id}`, {
+      await fetch(`https://my-products-db-server.onrender.com/products/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateProduct),
-      }).then(() => {
-        setLoading(false);
-        setTimeout(() => {
-          alert("✅Product Edited Successfully!");
-          navigate("/products", { state: { focusId: id } }); //navigate with loction State or navigate State (an alternate for URL/${} parameter pass)
-        }, 100);
       });
+      alert("✅ Product Edited Successfully!");
+      navigate("/products", { state: { focusId: id } });
+    } catch (error) {
+      console.error(error);
+      alert("❌ Failed to update product!");
+    } finally {
+      setLoading(false);
     }
   };
 

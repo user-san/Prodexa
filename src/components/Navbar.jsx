@@ -27,18 +27,6 @@ function MyNavbar() {
   const cartProductsLength = useSelector((state) => state.Cart.length);
   const [expanded, setExpanded] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        // md breakpoint
-        setExpanded(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <Navbar
       expand="md"
@@ -63,6 +51,8 @@ function MyNavbar() {
           aria-labelledby="offcanvasNavbarLabel-expand-md"
           placement="end"
           className="offcanvas-md"
+          backdrop="true" // makes sure backdrop covers screen
+          scroll={false} // disables body scroll when open
         >
           <Offcanvas.Header closeButton className="offcanvas-header">
             <Offcanvas.Title id="offcanvasNavbarLabel-expand-md">

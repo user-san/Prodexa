@@ -1,6 +1,7 @@
 .navbar {
   background: linear-gradient(to right, #6d6c6c, #e5e5e5);
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
   z-index: 1030;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -67,18 +68,28 @@
 }
 
 .offcanvas-header {
-  background: linear-gradient(to right, #6d6c6c, #e5e5e5);
+  background: linear-gradient(to right, #6d6c6c, #cacaca);
   border-bottom: 1px #000000 solid;
 }
 
-.offcanvas-body {
-  padding: 1rem;
-  background: transparent;
+body.offcanvas-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+}
+
+.offcanvas-backdrop.show {
+  opacity: 0.5;
+  background-color: #000000;
+}
+
+.offcanvas-backdrop {
+  background-color: rgb(0, 0, 0);
 }
 
 @media (max-width: 767.98px) {
   .offcanvas-body {
-    background: linear-gradient(to right, #6d6c6c, #e5e5e5) !important;
+    background: linear-gradient(to right, #b8b8b8, #6d6c6c) !important;
   }
   .nav-link {
     color: #393939c5;

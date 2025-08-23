@@ -35,7 +35,7 @@ const Cart = () => {
       </div>
 
       {cartProducts.length !== 0 ? (
-        <section className="productSection">
+        <section className="CartProductsSection">
           {cartProducts.map((product) => {
             return (
               <Card

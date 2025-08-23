@@ -4,6 +4,7 @@ import useFetch from "./custom_hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import "./AddProducts.css";
 import { ThreeDot } from "react-loading-indicators";
+import  tempProductImg  from "../assets/tempProductImg.jpg";
 const AddProducts = () => {
   const descriptionRef = useRef(null);
   const priceRef = useRef(null);
@@ -15,7 +16,7 @@ const AddProducts = () => {
     price: "",
     description: "",
     category: "New items",
-    image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    image: `${tempProductImg}`,
     rating: { rate: "", count: "" },
   });
 
